@@ -17,7 +17,7 @@ namespace Maps
         {
             base.OnStartup(e);
 
-            new MainWindow { DataContext = new ViewModels.ViewModel(new Models.Model()) }.Show();
+            new MainWindow { DataContext = new ViewModels.MainViewModel(new Models.Model()) }.Show();
         }
     }
 }

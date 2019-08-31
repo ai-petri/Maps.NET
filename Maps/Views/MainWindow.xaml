@@ -7,6 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Name="ScrollViewer" HorizontalScrollBarVisibility="Visible" MouseMove="ScrollViewer_MouseMove">
+            <Image Name="Map" 
+             Source="{Binding MapSource}"
+             />
+        </ScrollViewer>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+        <StackPanel Grid.Column="2">
+            <Button Margin="5" Width="100" Content="Настройки" Click="Settings_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock Margin="5" Text="Долгота: "/>
+            <TextBlock Margin="5" Text="{Binding Longitude}"/>
+            <TextBlock Margin="5" Text="Широота: "/>
+            <TextBlock Margin="5" Text="{Binding Latitude}"/>
+        </StackPanel>
         
     </Grid>
 </Window>

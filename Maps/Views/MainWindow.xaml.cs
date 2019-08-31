@@ -24,5 +24,21 @@ namespace Maps
         {
             InitializeComponent();
         }
+
+        private void ScrollViewer_MouseMove(object sender, MouseEventArgs e)
+        {
+            (DataContext as ViewModels.MainViewModel).Latitude = Mouse.GetPosition(Map).X;
+            (DataContext as ViewModels.MainViewModel).Longitude = Mouse.GetPosition(Map).Y;
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Views.Settings settingsWindow =  new Views.Settings { DataContext = new ViewModels.SettingsViewModel() };
+
+            if (settingsWindow.ShowDialog() == true)
+            {
+                MessageBox.Show("");
+            }
+        }
     }
 }
