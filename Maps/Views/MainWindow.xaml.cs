@@ -31,14 +31,7 @@ namespace Maps
             (DataContext as ViewModels.MainViewModel).Longitude = Mouse.GetPosition(Map).Y;
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            Views.Settings settingsWindow =  new Views.Settings { DataContext = new ViewModels.SettingsViewModel() };
-
-            if (settingsWindow.ShowDialog() == true)
-            {
-                (DataContext as ViewModels.MainViewModel).MapSource = new BitmapImage(new Uri((settingsWindow.DataContext as ViewModels.SettingsViewModel).Source));
-            }
-        }
+        
+        
     }
 }

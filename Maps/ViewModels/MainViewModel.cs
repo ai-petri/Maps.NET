@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -20,8 +21,20 @@ namespace Maps.ViewModels
         public MainViewModel(Model model)
         {
             Model = model;
+            model.Updated += Update;
+            OpenSettingsCommand = new RelayCommand(_ => OpenSettings());
+        }
 
-           Bmp = new Bitmap("C:\\Users\\home\\Desktop\\image.jpg");
+        private void Update()
+        {
+            Bmp = new Bitmap(Model.Source);
+            RaisePropertyChanged();
+        }
+
+        private void OpenSettings()
+        {
+            WindowManager.OpenSettings();
+
         }
 
         public Model Model { get; private set; }
@@ -39,7 +52,7 @@ namespace Maps.ViewModels
             set
             {
                 bmp = value;
-                mapSource = bmp.ToBitmapImage();
+                MapSource = bmp.ToBitmapImage();
             }
         }
             
@@ -126,7 +139,7 @@ namespace Maps.ViewModels
 
         #endregion 
 
-        
+        public RelayCommand OpenSettingsCommand { get; private set; }
 
         public void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {

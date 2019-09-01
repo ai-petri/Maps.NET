@@ -8,5 +8,26 @@ namespace Maps.Models
 {
     public class Model
     {
+
+
+        public event Action Updated;
+
+        private string source;
+        public string Source
+        {
+            get
+            {
+                return source;
+            }
+            set
+            {
+                source = value;
+                Updated();
+            }
+        }
+        public double BottomLatitude { get; set; }
+        public double TopLattitude { get; set; }
+        public double LeftLongitude { get; set; }
+        public double RightLongitude { get; set; }
     }
 }

@@ -23,9 +23,13 @@
              />
         </ScrollViewer>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+        
+        <!--Настройки-->
         <StackPanel Grid.Column="2">
-            <Button Margin="5" Width="100" Content="Настройки" Click="Settings_Click"/>
+            <Button Margin="5" Width="100" Content="Настройки" Command="{Binding OpenSettingsCommand}"/>
         </StackPanel>
+        
+        
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Долгота: "/>
             <TextBlock Margin="5" Text="{Binding Longitude}"/>

@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,27 +15,19 @@ using System.Windows.Shapes;
 namespace Maps.Views
 {
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class Settings : Window
+    public partial class SettingsWindow : Window
     {
-        public Settings()
+        public SettingsWindow()
         {
             InitializeComponent();
         }
 
         private void OK_Button_Click(object sender, RoutedEventArgs e)
         {
+            (DataContext as ViewModels.SettingsViewModel).SaveChanges();
             DialogResult = true;
-        }
-
-        private void Select_Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if (dialog.ShowDialog() == true)
-            {
-                ((ViewModels.SettingsViewModel)DataContext).Source = dialog.FileName;
-            }
         }
     }
 }
