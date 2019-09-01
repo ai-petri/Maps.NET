@@ -54,7 +54,7 @@ namespace Maps.ViewModels
             }
             set
             {
-                MapSource = value;
+                mapSource = value;
                 RaisePropertyChanged();
             }
         }

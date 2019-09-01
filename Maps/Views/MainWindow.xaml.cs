@@ -37,7 +37,7 @@ namespace Maps
 
             if (settingsWindow.ShowDialog() == true)
             {
-                MessageBox.Show("");
+                (DataContext as ViewModels.MainViewModel).MapSource = new BitmapImage(new Uri((settingsWindow.DataContext as ViewModels.SettingsViewModel).Source));
             }
         }
     }

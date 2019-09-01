@@ -39,8 +39,8 @@
             </Grid.RowDefinitions>
             <DockPanel Margin="15" Grid.ColumnSpan="3"  >
                 
-                <Button Margin="15 0 0 0" DockPanel.Dock="Right"  >Загрузить..</Button>
-                <TextBox  />
+                <Button Margin="15 0 0 0" DockPanel.Dock="Right" Click="Select_Button_Click" >Загрузить..</Button>
+                <TextBox Text="{Binding Source}" />
             </DockPanel>
             
             <TextBox Margin="15" Grid.Row="1" />
