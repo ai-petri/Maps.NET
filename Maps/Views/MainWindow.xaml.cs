@@ -27,8 +27,8 @@ namespace Maps
 
         private void ScrollViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            (DataContext as ViewModels.MainViewModel).Latitude = Mouse.GetPosition(Map).X;
-            (DataContext as ViewModels.MainViewModel).Longitude = Mouse.GetPosition(Map).Y;
+            (DataContext as ViewModels.MainViewModel).X = Mouse.GetPosition(Map).X;
+            (DataContext as ViewModels.MainViewModel).Y = Mouse.GetPosition(Map).Y;
         }
 
         

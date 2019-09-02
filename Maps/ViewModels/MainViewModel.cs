@@ -72,7 +72,7 @@ namespace Maps.ViewModels
             }
         }
 
-        
+
 
         // Координаты
         #region
@@ -89,7 +89,7 @@ namespace Maps.ViewModels
             set
             {
                 x = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("");
             }
         }
 
@@ -105,21 +105,27 @@ namespace Maps.ViewModels
             set
             {
                 y = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("");
             }
         }
 
+       
         public double Longitude
         {
             get
             {
-                return x;
-            }
-
-            set
-            {
-                x = value;
-                RaisePropertyChanged();
+                if (MapSource is null)
+                {
+                    return 0.0;
+                }
+                else
+                {
+                    if (MapSource.Width > 0)
+                    {
+                        return ((Model.RightLongitude - Model.LeftLongitude) / MapSource.Width) * X + Model.LeftLongitude;
+                    }
+                    else return 0.0;
+                }
             }
         }
 
@@ -128,13 +134,19 @@ namespace Maps.ViewModels
         {
             get
             {
-                return y;
-            }
-            set
-            {
-                y = value;
-                RaisePropertyChanged();
-            }
+                if (MapSource is null)
+                {
+                    return 0.0;
+                }
+                else
+                {
+                    if (MapSource.Height > 0)
+                    {
+                        return ((Model.BottomLatitude - Model.TopLatitude) / MapSource.Height) * Y + Model.TopLatitude;
+                    }
+                    else return 0.0;
+                }
+            }            
         }
 
         #endregion 

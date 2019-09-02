@@ -26,7 +26,7 @@ namespace Maps.Models
             }
         }
         public double BottomLatitude { get; set; }
-        public double TopLattitude { get; set; }
+        public double TopLatitude { get; set; }
         public double LeftLongitude { get; set; }
         public double RightLongitude { get; set; }
     }

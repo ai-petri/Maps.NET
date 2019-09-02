@@ -20,7 +20,7 @@ namespace Maps.ViewModels
 
             Source = model.Source;
             BottomLatitude = model.BottomLatitude;
-            TopLatitude = model.TopLattitude;
+            TopLatitude = model.TopLatitude;
             LeftLongitude = model.LeftLongitude;
             RightLongitude = model.RightLongitude;
 
@@ -110,7 +110,7 @@ namespace Maps.ViewModels
         {
             Model.Source = Source;
             Model.BottomLatitude = BottomLatitude;
-            Model.TopLattitude = TopLatitude;
+            Model.TopLatitude = TopLatitude;
             Model.LeftLongitude = LeftLongitude;
             Model.RightLongitude = RightLongitude;
 
