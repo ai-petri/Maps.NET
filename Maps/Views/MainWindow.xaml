@@ -17,9 +17,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer Name="ScrollViewer" HorizontalScrollBarVisibility="Visible" MouseMove="ScrollViewer_MouseMove">
+        <!-- Карта -->
+        <ScrollViewer Name="ScrollViewer" Background="Black" HorizontalScrollBarVisibility="Visible" MouseMove="ScrollViewer_MouseMove" LayoutUpdated="ScrollViewer_LayoutUpdated">
             <Image Name="Map" 
              Source="{Binding MapSource}"
+              Width="{Binding Width}"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Top"
              />
         </ScrollViewer>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
@@ -29,13 +33,19 @@
             <Button Margin="5" Width="100" Content="Настройки" Command="{Binding OpenSettingsCommand}"/>
         </StackPanel>
         
-        
+        <!-- Координаты -->
         <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Margin="5" Text="Долгота: "/>
-            <TextBlock Margin="5" Text="{Binding Longitude}"/>
+            <TextBlock Margin="5" Text="{Binding Longitude, StringFormat=0.0}"/>
             <TextBlock Margin="5" Text="Широота: "/>
-            <TextBlock Margin="5" Text="{Binding Latitude}"/>
+            <TextBlock Margin="5" Text="{Binding Latitude, StringFormat=0.0}"/>
+            
         </StackPanel>
         
+        <!-- Масштаб -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal" >
+            <Slider Margin="5" Width="100" Minimum="0" Maximum="500" Value="{Binding Scale}" />
+            <TextBox Margin="5" Width="50" Text="{Binding Scale, StringFormat=0, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
     </Grid>
 </Window>

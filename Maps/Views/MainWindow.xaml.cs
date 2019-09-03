@@ -31,7 +31,11 @@ namespace Maps
             (DataContext as ViewModels.MainViewModel).Y = Mouse.GetPosition(Map).Y;
         }
 
-        
-        
+
+        private void ScrollViewer_LayoutUpdated(object sender, EventArgs e)
+        {
+            (DataContext as ViewModels.MainViewModel).ViewportWidth = ScrollViewer.ViewportWidth;
+        }
     }
+    
 }

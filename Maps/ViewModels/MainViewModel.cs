@@ -68,7 +68,8 @@ namespace Maps.ViewModels
             set
             {
                 mapSource = value;
-                RaisePropertyChanged();
+               Scale = 100.0 * ViewportWidth / value.Width;
+                RaisePropertyChanged("");
             }
         }
 
@@ -150,6 +151,36 @@ namespace Maps.ViewModels
         }
 
         #endregion 
+
+
+        public double Width
+        {
+            get
+            {
+                return 0.01 * Scale * (MapSource?.Width ?? 0.0);
+            }
+        }
+
+        public double ViewportWidth { get; set; }
+        
+
+
+        private double scale = 100.0;
+        public double Scale
+        {
+            get
+            {
+                return scale;
+            }
+            set
+            {
+                scale = value;
+                RaisePropertyChanged("");
+            }
+        }
+
+       
+
 
         public RelayCommand OpenSettingsCommand { get; private set; }
 
