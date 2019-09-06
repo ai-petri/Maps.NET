@@ -50,5 +50,19 @@ namespace Maps
                 return "";
             }
         }
+
+        public static string SaveAs()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = "jpg";
+            if (dialog.ShowDialog() == true)
+            {
+                return dialog.FileName;
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

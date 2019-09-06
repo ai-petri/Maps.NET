@@ -31,6 +31,7 @@
         <!--Настройки-->
         <StackPanel Grid.Column="2">
             <Button Margin="5" Width="100" Content="Настройки" Command="{Binding OpenSettingsCommand}"/>
+            <Button Margin="5" Width="100" Content="Сохранить" Command="{Binding SaveAsCommand}"/>
         </StackPanel>
         
         <!-- Координаты -->

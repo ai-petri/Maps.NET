@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace Maps
 {
@@ -67,6 +68,25 @@ namespace Maps
                     }
                 }
             }
+        }
+
+
+        public static void SaveAsJpeg(this Bitmap bitmap, string filename)
+        {
+            ImageCodecInfo jpgEncoder = null;
+            foreach (var c in ImageCodecInfo.GetImageEncoders())
+            {
+                if (c.FormatID == ImageFormat.Jpeg.Guid)
+                {
+                    jpgEncoder = c;
+                }
+            }
+
+            EncoderParameters parameters = new EncoderParameters(1);
+
+            parameters.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
+
+            bitmap.Save(filename, jpgEncoder, parameters);
         }
     }
 }

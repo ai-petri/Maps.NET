@@ -22,8 +22,15 @@ namespace Maps.ViewModels
         {
             Model = model;
             model.Updated += Update;
-            OpenSettingsCommand = new RelayCommand(_ => OpenSettings());
+            OpenSettingsCommand = new RelayCommand(_ => WindowManager.OpenSettings());
+            SaveAsCommand = new RelayCommand(_ => Bmp.SaveAsJpeg(WindowManager.SaveAs()), _=> Bmp!=null);
+
         }
+
+
+        public RelayCommand OpenSettingsCommand { get; private set; }
+        public RelayCommand SaveAsCommand { get; private set; }
+
 
         private void Update()
         {
@@ -31,11 +38,8 @@ namespace Maps.ViewModels
             RaisePropertyChanged();
         }
 
-        private void OpenSettings()
-        {
-            WindowManager.OpenSettings();
+        
 
-        }
 
         public Model Model { get; private set; }
 
@@ -182,7 +186,7 @@ namespace Maps.ViewModels
        
 
 
-        public RelayCommand OpenSettingsCommand { get; private set; }
+       
 
         public void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
