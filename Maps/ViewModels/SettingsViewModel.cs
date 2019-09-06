@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,6 +29,14 @@ namespace Maps.ViewModels
 
         public Models.Model Model { get; private set; }
 
+
+        public ObservableCollection<Location> Locations
+        {
+            get
+            {
+                return new ObservableCollection<Location>(Model.Locations);
+            }
+        }
 
 
         #region

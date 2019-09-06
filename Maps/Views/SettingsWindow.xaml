@@ -21,6 +21,7 @@
             <TextBlock HorizontalAlignment="Right" Margin="15" Text="Карта:"/>
             <TextBlock HorizontalAlignment="Right" Margin="15" Text="Долгота:"/>
             <TextBlock HorizontalAlignment="Right" Margin="15" Text="Широта:"/>
+            <TextBlock  HorizontalAlignment="Right" Margin="15" Text="Список станций:"/>
 
 
         </StackPanel>
@@ -32,6 +33,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -50,7 +52,32 @@
             <TextBlock Margin="15" Grid.Column="1" Grid.Row="2">...</TextBlock>
             <TextBox Margin="15" Grid.Row="2" Grid.Column="2" Text="{Binding TopLatitude}"/>
 
+            <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Height="200" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    
+                    <Button Margin="5" Padding="2" >Добавить</Button>
+                    <Button Margin="5" Padding="2" >Удалить</Button>
+                    <Button Margin="5" Padding="2" >Загрузить из файла..</Button>
+                </StackPanel>
+                
+                <ListView  ItemsSource="{Binding Locations}" Height="180" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Width="80" Header="Долгота" DisplayMemberBinding="{Binding Longitude}"/>
+                                <GridViewColumn Width="80" Header="Широта" DisplayMemberBinding="{Binding Latitude}"/>
+                                <GridViewColumn Width="200" Header="Название" DisplayMemberBinding="{Binding Name}" />
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+            
+
+
         </Grid>
+
+        
 
 
         <DockPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right">

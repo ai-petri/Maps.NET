@@ -34,8 +34,12 @@ namespace Maps.ViewModels
 
         private void Update()
         {
-            Bmp = new Bitmap(Model.Source);
-            RaisePropertyChanged();
+            if(Model.Source != "" && File.Exists(Model.Source))
+            {
+                Bmp = new Bitmap(Model.Source);
+                RaisePropertyChanged();
+            }
+            
         }
 
         

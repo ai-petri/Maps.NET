@@ -8,8 +8,10 @@ namespace Maps.Models
 {
     public class Model
     {
-
-
+        public Model()
+        {
+            Locations.Add(new Location("test", 50, 50));
+        }
         public event Action Updated;
 
         private string source;
@@ -29,5 +31,7 @@ namespace Maps.Models
         public double TopLatitude { get; set; }
         public double LeftLongitude { get; set; }
         public double RightLongitude { get; set; }
+
+        public List<Location> Locations { get; set; } = new List<Location>();
     }
 }
