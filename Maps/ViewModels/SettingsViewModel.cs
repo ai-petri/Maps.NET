@@ -121,6 +121,7 @@ namespace Maps.ViewModels
             Model.LeftLongitude = LeftLongitude;
             Model.RightLongitude = RightLongitude;
             Model.Locations = new List<Location>(Locations);
+            
 
         }
 

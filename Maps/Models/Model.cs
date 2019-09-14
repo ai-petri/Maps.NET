@@ -32,6 +32,18 @@ namespace Maps.Models
         public double LeftLongitude { get; set; }
         public double RightLongitude { get; set; }
 
-        public List<Location> Locations { get; set; } = new List<Location>();
+        private List<Location> locations = new List<Location>();
+        public List<Location> Locations
+        {
+            get
+            {
+                return locations;
+            }
+            set
+            {
+                locations = value;
+                Updated();
+            }
+        }
     }
 }

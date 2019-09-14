@@ -27,7 +27,7 @@ namespace Maps.ViewModels
             SaveAsCommand = new RelayCommand(_ => Bmp.SaveAsJpeg(WindowManager.SaveAs()), _=> Bmp!=null);
 
             Locations  = new ObservableCollection<Location>(Model.Locations);
-    }
+        }
 
 
         public RelayCommand OpenSettingsCommand { get; private set; }
