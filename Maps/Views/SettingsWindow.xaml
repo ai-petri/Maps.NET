@@ -55,22 +55,22 @@
             <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Height="200" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     
-                    <Button Margin="5" Padding="2" >Добавить</Button>
+                    <Button Margin="5" Padding="2" Command="{Binding AddLocationCommand}">Добавить</Button>
                     <Button Margin="5" Padding="2" >Удалить</Button>
                     <Button Margin="5" Padding="2" >Загрузить из файла..</Button>
                 </StackPanel>
-                
-                <ListView  ItemsSource="{Binding Locations}" Height="180" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <ListView.View>
-                        <GridView>
-                            <GridView.Columns>
-                                <GridViewColumn Width="80" Header="Долгота" DisplayMemberBinding="{Binding Longitude}"/>
-                                <GridViewColumn Width="80" Header="Широта" DisplayMemberBinding="{Binding Latitude}"/>
-                                <GridViewColumn Width="200" Header="Название" DisplayMemberBinding="{Binding Name}" />
-                            </GridView.Columns>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+
+                <DataGrid  Height="180" ItemsSource="{Binding Locations}" AutoGenerateColumns="False">
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="Долгота" Width="*" Binding="{Binding Longitude}"/>
+                        <DataGridTextColumn Header="Широта"  Width="*" Binding="{Binding Latitude}"/>
+                        <DataGridTextColumn Header="Название" Width="3*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Описание" Width="5*" Binding="{Binding Description}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
             </StackPanel>
             
 

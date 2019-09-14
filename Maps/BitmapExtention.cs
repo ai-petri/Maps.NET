@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using Encoder = System.Drawing.Imaging.Encoder;
 
@@ -73,6 +74,8 @@ namespace Maps
 
         public static void SaveAsJpeg(this Bitmap bitmap, string filename)
         {
+            if (filename == "") return;
+
             ImageCodecInfo jpgEncoder = null;
             foreach (var c in ImageCodecInfo.GetImageEncoders())
             {
@@ -86,7 +89,17 @@ namespace Maps
 
             parameters.Param[0] = new EncoderParameter(Encoder.Quality, 100L);
 
-            bitmap.Save(filename, jpgEncoder, parameters);
+
+            try
+            {
+                bitmap.Save(filename, jpgEncoder, parameters);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            
         }
     }
 }

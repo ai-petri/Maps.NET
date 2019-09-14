@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Maps.ViewModels
 {
@@ -17,7 +18,8 @@ namespace Maps.ViewModels
         {
             Model = model;
 
-            OpenFileCommand = new RelayCommand(_ => { Source = WindowManager.OpenFile(); });
+            OpenFileCommand = new RelayCommand(_ =>  Source = WindowManager.OpenFile());
+            AddLocationCommand = new RelayCommand(_ => Locations.Add(new Location("", 0, 0)));
 
             Source = model.Source;
             BottomLatitude = model.BottomLatitude;
@@ -25,18 +27,14 @@ namespace Maps.ViewModels
             LeftLongitude = model.LeftLongitude;
             RightLongitude = model.RightLongitude;
 
+            Locations = new ObservableCollection<Location>(Model.Locations);
         }
 
         public Models.Model Model { get; private set; }
 
 
-        public ObservableCollection<Location> Locations
-        {
-            get
-            {
-                return new ObservableCollection<Location>(Model.Locations);
-            }
-        }
+        public ObservableCollection<Location> Locations { get; private set; }
+        
 
 
         #region
@@ -122,10 +120,12 @@ namespace Maps.ViewModels
             Model.TopLatitude = TopLatitude;
             Model.LeftLongitude = LeftLongitude;
             Model.RightLongitude = RightLongitude;
+            Model.Locations = new List<Location>(Locations);
 
         }
 
         public RelayCommand OpenFileCommand { get; private set; }
+        public RelayCommand AddLocationCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

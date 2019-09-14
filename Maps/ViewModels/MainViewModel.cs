@@ -1,6 +1,7 @@
 ﻿using Maps.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -25,11 +26,14 @@ namespace Maps.ViewModels
             OpenSettingsCommand = new RelayCommand(_ => WindowManager.OpenSettings());
             SaveAsCommand = new RelayCommand(_ => Bmp.SaveAsJpeg(WindowManager.SaveAs()), _=> Bmp!=null);
 
-        }
+            Locations  = new ObservableCollection<Location>(Model.Locations);
+    }
 
 
         public RelayCommand OpenSettingsCommand { get; private set; }
         public RelayCommand SaveAsCommand { get; private set; }
+
+        public ObservableCollection<Location> Locations { get; private set; } = new ObservableCollection<Location>();
 
 
         private void Update()
@@ -39,7 +43,10 @@ namespace Maps.ViewModels
                 Bmp = new Bitmap(Model.Source);
                 RaisePropertyChanged();
             }
+
+            Locations = new ObservableCollection<Location>(Model.Locations);
             
+
         }
 
         
@@ -187,10 +194,10 @@ namespace Maps.ViewModels
             }
         }
 
-       
 
 
-       
+
+
 
         public void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
