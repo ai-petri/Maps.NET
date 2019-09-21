@@ -23,6 +23,7 @@ namespace Maps.ViewModels
         {
             Model = model;
             model.Updated += Update;
+            model.SourceUpdated += UpdateSource;
             OpenSettingsCommand = new RelayCommand(_ => WindowManager.OpenSettings());
             SaveAsCommand = new RelayCommand(_ => Bmp.SaveAsJpeg(WindowManager.SaveAs()), _=> Bmp!=null);
 
@@ -33,28 +34,39 @@ namespace Maps.ViewModels
         public RelayCommand OpenSettingsCommand { get; private set; }
         public RelayCommand SaveAsCommand { get; private set; }
 
-        public ObservableCollection<Location> Locations { get; private set; } = new ObservableCollection<Location>();
+        private ObservableCollection<Location> locations = new ObservableCollection<Location>();
+        public ObservableCollection<Location> Locations
+        {
+            get
+            {
+                return locations;
+            }
+            set
+            {
+                locations = value;
+                LocationsUpdated?.Invoke();
+            }
+        }
 
 
-        private void Update()
+        private void UpdateSource()
         {
             if(Model.Source != "" && File.Exists(Model.Source))
             {
                 Bmp = new Bitmap(Model.Source);
-                RaisePropertyChanged();
             }
-
-            Locations = new ObservableCollection<Location>(Model.Locations);
-            
-
         }
 
-        
+        private void Update()
+        {
+            Locations = new ObservableCollection<Location>(Model.Locations);
+        }
 
 
         public Model Model { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event Action LocationsUpdated;
 
 
         private Bitmap bmp;
@@ -125,6 +137,40 @@ namespace Maps.ViewModels
             }
         }
 
+
+        public double GetX(double longitude)
+        {
+            if (MapSource is null)
+            {
+                return 0.0;
+            }
+            else
+            {
+                if (MapSource.Width>0 && (Model.RightLongitude - Model.LeftLongitude)!=0)
+                {
+                    return 0.01* Scale * (longitude - Model.LeftLongitude) * MapSource.Width / (Model.RightLongitude - Model.LeftLongitude); 
+                }
+                else return 0.0;
+            }
+            
+        }
+
+        public double GetY(double latitude)
+        {
+            if (MapSource is null)
+            {
+                return 0.0;
+            }
+            else
+            {
+                if (MapSource.Height > 0 && (Model.TopLatitude - Model.BottomLatitude)!=0)
+                {
+                    return  0.01 * Scale * ((Model.TopLatitude - latitude - Model.BottomLatitude) * MapSource.Height / (Model.TopLatitude - Model.BottomLatitude));
+
+                }
+                else return 0.0;
+            }
+        }
        
         public double Longitude
         {
@@ -138,7 +184,7 @@ namespace Maps.ViewModels
                 {
                     if (MapSource.Width > 0)
                     {
-                        return ((Model.RightLongitude - Model.LeftLongitude) / MapSource.Width) * X + Model.LeftLongitude;
+                        return (((Model.RightLongitude - Model.LeftLongitude) / MapSource.Width) * X + Model.LeftLongitude) / (0.01*Scale);
                     }
                     else return 0.0;
                 }
@@ -158,7 +204,7 @@ namespace Maps.ViewModels
                 {
                     if (MapSource.Height > 0)
                     {
-                        return ((Model.BottomLatitude - Model.TopLatitude) / MapSource.Height) * Y + Model.TopLatitude;
+                        return Model.TopLatitude - ((( Model.TopLatitude - Model.BottomLatitude) / MapSource.Height) * Y + Model.BottomLatitude) / ( 0.01 * Scale);
                     }
                     else return 0.0;
                 }

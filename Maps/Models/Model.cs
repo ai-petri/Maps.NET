@@ -12,6 +12,7 @@ namespace Maps.Models
         {
             Locations.Add(new Location("test", 50, 50));
         }
+        public event Action SourceUpdated;
         public event Action Updated;
 
         private string source;
@@ -23,14 +24,78 @@ namespace Maps.Models
             }
             set
             {
-                source = value;
+                if (source != value)
+                {
+                    source = value;
+                    SourceUpdated();
+                }                
+            }
+        }
+        private double bottomLatitude = 0;
+        public double BottomLatitude
+        {
+            get
+            {
+                return bottomLatitude;
+            }
+            set
+            {
+                if(bottomLatitude != value)
+                {
+                    bottomLatitude = value;
+                    Updated();
+                }               
+            }
+        }
+
+        private double topLatitude = 100;
+        public double TopLatitude
+        {
+            get
+            {
+                return topLatitude;
+            }
+            set
+            {
+                if(topLatitude != value)
+                {
+                    topLatitude = value;
+                    Updated();
+                }
+            }
+        }
+
+        private double leftLongitude = 0;
+        public double LeftLongitude
+        {
+            get
+            {
+                return leftLongitude;
+            }
+            set
+            {
+                leftLongitude = value;
                 Updated();
             }
         }
-        public double BottomLatitude { get; set; }
-        public double TopLatitude { get; set; }
-        public double LeftLongitude { get; set; }
-        public double RightLongitude { get; set; }
+
+        private double rightLongitude = 100;
+        public double RightLongitude
+        {
+            get
+            {
+                return rightLongitude;
+            }
+            set
+            {
+                if (rightLongitude != value)
+                {
+                    rightLongitude = value;
+                    Updated();
+                }
+            }
+        }
+
 
         private List<Location> locations = new List<Location>();
         public List<Location> Locations

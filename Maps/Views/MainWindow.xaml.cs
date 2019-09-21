@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,49 @@ namespace Maps
         public MainWindow()
         {
             InitializeComponent();
+
+            Loaded += MainWindow_Loaded;
+            
+        }
+
+        private List<Rectangle> rectangles = new List<Rectangle>(); // кводратики, обозначающие станции
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            (DataContext as ViewModels.MainViewModel).LocationsUpdated += LocationsUpdated;
+            (DataContext as INotifyPropertyChanged).PropertyChanged += PropertyChanged;
+        }
+
+        private void PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            foreach (Rectangle rectangle in rectangles)
+            {
+                Location location = rectangle.DataContext as Location;
+                Canvas.SetLeft(rectangle, (DataContext as ViewModels.MainViewModel).GetX(location.Longitude));
+                Canvas.SetTop(rectangle, (DataContext as ViewModels.MainViewModel).GetY(location.Latitude));
+            }
+        }
+
+        private void LocationsUpdated()
+        {
+            // станции обозначаются квадратиками
+            foreach (Location location in (DataContext as ViewModels.MainViewModel).Locations)
+            {
+                Rectangle rectangle = new Rectangle
+                {
+                    Width = 10,
+                    Height = 10,
+                    Fill = Brushes.Red                    
+                };
+
+                Canvas.SetLeft(rectangle, (DataContext as ViewModels.MainViewModel).GetX(location.Longitude));
+                Canvas.SetTop(rectangle, (DataContext as ViewModels.MainViewModel).GetY(location.Latitude));
+
+                rectangle.DataContext = location;
+
+                rectangles.Add(rectangle);
+                MapCanvas.Children.Add(rectangle);
+            }
         }
 
         private void ScrollViewer_MouseMove(object sender, MouseEventArgs e)
@@ -36,6 +80,8 @@ namespace Maps
         {
             (DataContext as ViewModels.MainViewModel).ViewportWidth = ScrollViewer.ViewportWidth;
         }
+
+        
     }
     
 }

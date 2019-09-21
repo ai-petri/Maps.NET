@@ -47,7 +47,7 @@
 
         <!-- Карта -->
         <ScrollViewer Grid.Row="1" Name="ScrollViewer" Background="Black" HorizontalScrollBarVisibility="Visible" MouseMove="ScrollViewer_MouseMove" LayoutUpdated="ScrollViewer_LayoutUpdated">
-            <Canvas Name="MapCanvas">
+            <Canvas Name="MapCanvas" Width="{Binding ElementName=Map, Path=ActualWidth}" Height="{Binding ElementName=Map, Path=ActualHeight}">
                 <Image Name="Map" 
              Source="{Binding MapSource}"
               Width="{Binding Width}"
