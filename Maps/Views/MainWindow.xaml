@@ -47,12 +47,15 @@
 
         <!-- Карта -->
         <ScrollViewer Grid.Row="1" Name="ScrollViewer" Background="Black" HorizontalScrollBarVisibility="Visible" MouseMove="ScrollViewer_MouseMove" LayoutUpdated="ScrollViewer_LayoutUpdated">
-            <Image Name="Map" 
+            <Canvas Name="MapCanvas">
+                <Image Name="Map" 
              Source="{Binding MapSource}"
               Width="{Binding Width}"
               HorizontalAlignment="Left"
               VerticalAlignment="Top"
              />
+            </Canvas>
+            
         </ScrollViewer>
         
         <GridSplitter Grid.Row="2"  Height="5"  HorizontalAlignment="Stretch" />
